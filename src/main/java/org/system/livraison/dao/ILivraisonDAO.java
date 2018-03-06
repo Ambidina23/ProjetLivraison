@@ -14,7 +14,7 @@ import org.system.livraison.entities.Mission;
 import org.system.livraison.entities.Objet;
 import org.system.livraison.entities.Reservation;
 import org.system.livraison.entities.Vehicule;
-
+// interface DAO
 public interface ILivraisonDAO {
 	public Client addClient(Client cli );
 	public Commande addCommande(Commande cmd);
