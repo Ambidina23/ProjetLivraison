@@ -1,11 +1,14 @@
 package org.system.livraison.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,53 +17,52 @@ import javax.persistence.Table;
 public class Employe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codeEmployé;
-	private String nomEmployé;
-	private String prenomEmployé;
-	@ManyToOne
-	@JoinColumn(name="idGroupe")
-	private String Groupe;
+	private int refEmploye;
+	private String nomEmploye;
+	private String prenomEmploye;
+	@ManyToMany
+	@JoinTable(name="Emp_Equi")
+	private Collection <Equipe> equipes;
 	@OneToOne
 	@JoinColumn(name="idAdresse")
 	private String Adresse;
-	public Employe(String nomEmployé, String prenomEmployé) {
+	public Employe(String nomEmploye, String prenomEmploye) {
 		super();
-		this.nomEmployé = nomEmployé;
-		this.prenomEmployé = prenomEmployé;
+		this.setNomEmploye(nomEmploye);
+		this.setPrenomEmploye(prenomEmploye);
+		
 	}
 	public Employe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getCodeEmployé() {
-		return codeEmployé;
+	public String getNomEmploye() {
+		return nomEmploye;
 	}
-	public void setCodeEmployé(int codeEmployé) {
-		this.codeEmployé = codeEmployé;
+	public void setNomEmploye(String nomEmploye) {
+		this.nomEmploye = nomEmploye;
 	}
-	public String getNomEmployé() {
-		return nomEmployé;
+	public String getPrenomEmploye() {
+		return prenomEmploye;
 	}
-	public void setNomEmployé(String nomEmployé) {
-		this.nomEmployé = nomEmployé;
+	public void setPrenomEmploye(String prenomEmploye) {
+		this.prenomEmploye = prenomEmploye;
 	}
-	public String getPrenomEmployé() {
-		return prenomEmployé;
-	}
-	public void setPrenomEmployé(String prenomEmployé) {
-		this.prenomEmployé = prenomEmployé;
-	}
-	public String getGroupe() {
-		return Groupe;
-	}
-	public void setGroupe(String groupe) {
-		Groupe = groupe;
-	}
+
+
 	public String getAdresse() {
 		return Adresse;
 	}
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
 	}
-
+	
+	public Collection<Equipe> getEquipes() {
+		return equipes;
+	}
+	public void setEquipes(Collection<Equipe> equipes) {
+		this.equipes = equipes;
+	}
+	
+	
 }

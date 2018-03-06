@@ -23,7 +23,7 @@ public class Commande implements Serializable{
 	private static final long serialVersionUID = 4747619227099820040L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private double numCommande;
+	private double numCmd;
 	private Date dateCreationCmd;
 	private Date dateExpeditionCmd;
 	private Date dateLivraisonCmd;
@@ -52,7 +52,7 @@ public class Commande implements Serializable{
 	public Commande(double numCommande, Date dateCreationCmd, Date dateExpeditionCmd, Date dateLivraisonCmd,
 			boolean etatValidationCmd, boolean etatPaiementCmd) {
 		super();
-		this.numCommande = numCommande;
+		this.numCmd = numCommande;
 		this.dateCreationCmd = dateCreationCmd;
 		this.dateExpeditionCmd = dateExpeditionCmd;
 		this.dateLivraisonCmd = dateLivraisonCmd;
@@ -64,10 +64,10 @@ public class Commande implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public double getNumCommande() {
-		return numCommande;
+		return numCmd;
 	}
 	public void setNumCommande(double numCommande) {
-		this.numCommande = numCommande;
+		this.numCmd = numCommande;
 	}
 	public Date getDateCreationCmd() {
 		return dateCreationCmd;

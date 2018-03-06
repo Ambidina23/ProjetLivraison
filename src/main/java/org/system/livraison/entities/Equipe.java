@@ -16,9 +16,9 @@ import javax.persistence.Table;
 public class Equipe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String codeEquipe;
-	private String descritpEquipe;
-	@OneToMany(mappedBy="Equipe")
+	private String refEqui;
+	private String descritpEqui;
+	@JoinTable(name="Emp_Equi")
 	private Collection<Employe> employes;
 	@ManyToMany
 	@JoinTable(name="Equ_Miss")
@@ -29,20 +29,19 @@ public class Equipe {
 	}
 	public Equipe(String codeEquipe, String descritpEquipe) {
 		super();
-		this.codeEquipe = codeEquipe;
-		this.descritpEquipe = descritpEquipe;
+	
 	}
 	public String getCodeEquipe() {
-		return codeEquipe;
+		return refEqui;
 	}
-	public void setCodeEquipe(String codeEquipe) {
-		this.codeEquipe = codeEquipe;
+	public void setrefEquipe(String refEquipe) {
+		this.refEqui = refEquipe;
 	}
 	public String getDescritpEquipe() {
-		return descritpEquipe;
+		return descritpEqui;
 	}
 	public void setDescritpEquipe(String descritpEquipe) {
-		this.descritpEquipe = descritpEquipe;
+		this.descritpEqui = descritpEquipe;
 	}
 	public Collection<Employe> getEmployes() {
 		return employes;

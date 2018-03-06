@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Vehicule {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codeVehicule;
+	private int refVeh;
 	private String immatricule;
 	private long volumeVeh;
 	private long poidVeh;
@@ -45,10 +45,10 @@ public class Vehicule {
 	
 	
 	public int getCodeVehicule() {
-		return codeVehicule;
+		return refVeh;
 	}
 	public void setCodeVehicule(int codeVehicule) {
-		this.codeVehicule = codeVehicule;
+		this.refVeh = codeVehicule;
 	}
 	public String getImmatricule() {
 		return immatricule;

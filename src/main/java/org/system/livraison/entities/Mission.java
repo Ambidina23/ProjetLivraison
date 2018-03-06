@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class Mission {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long refMission;
-	private String typeMission;
-	private String descriptMission;
+	private long refMiss;
+	private String typeMiss;
+	private String descriptMiss;
 	@ManyToMany
 	@JoinTable(name="Miss_Grp")
 	private Collection<Equipe>equipes; 
@@ -32,27 +32,39 @@ public class Mission {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Mission(long refMission, String typeMission, String descriptMission) {
+	public Mission(String typeMiss, String descriptMiss, Collection<Equipe> equipes, Collection<Vehicule> vehicules,
+			Collection<Commande> commandes) {
 		super();
-		this.refMission=refMission;
-		this.typeMission = typeMission;
-		this.descriptMission = descriptMission;
+		this.typeMiss = typeMiss;
+		this.descriptMiss = descriptMiss;
+		this.equipes = equipes;
+		this.vehicules = vehicules;
+		this.commandes = commandes;
 	}
-	
-	
-	public String getTypeMission() {
-		return typeMission;
+	public long getRefMiss() {
+		return refMiss;
 	}
-	public void setTypeMission(String typeMission) {
-		this.typeMission = typeMission;
+	public void setRefMiss(long refMiss) {
+		this.refMiss = refMiss;
 	}
-	public String getDescriptMission() {
-		return descriptMission;
+	public String getTypeMiss() {
+		return typeMiss;
 	}
-	public void setDescriptMission(String descriptMission) {
-		this.descriptMission = descriptMission;
+	public void setTypeMiss(String typeMiss) {
+		this.typeMiss = typeMiss;
 	}
-	
+	public String getDescriptMiss() {
+		return descriptMiss;
+	}
+	public void setDescriptMiss(String descriptMiss) {
+		this.descriptMiss = descriptMiss;
+	}
+	public Collection<Equipe> getEquipes() {
+		return equipes;
+	}
+	public void setEquipes(Collection<Equipe> equipes) {
+		this.equipes = equipes;
+	}
 	public Collection<Vehicule> getVehicules() {
 		return vehicules;
 	}
@@ -66,17 +78,9 @@ public class Mission {
 		this.commandes = commandes;
 	}
 	
-	public Collection<Equipe> getEquipes() {
-		return equipes;
-	}
-	public void setEquipes(Collection<Equipe> equipes) {
-		this.equipes = equipes;
-	}
-	public long getRefMission() {
-		return refMission;
-	}
-	public void setRefMission(long refMission) {
-		this.refMission = refMission;
-	}
+	
+	
+
+	
 
 }

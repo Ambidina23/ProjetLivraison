@@ -1,6 +1,7 @@
 package org.system.livraison.entities;
 
 import java.util.Collection;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Reservation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private double numReservation;
+	private double refRes;
 	private Date dateReservation;
 	private Date dateDepart;
 	private double dureeTransport;
@@ -31,11 +31,11 @@ public class Reservation {
 	
 	
 	
-	public double getNumReservation() {
-		return numReservation;
+	public double getrefRes() {
+		return refRes;
 	}
 	public void setNumReservation(double numReservation) {
-		this.numReservation = numReservation;
+		this.refRes = numReservation;
 	}
 	public Date getDateReservation() {
 		return dateReservation;
