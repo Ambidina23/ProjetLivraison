@@ -15,7 +15,7 @@ import org.system.livraison.entities.Objet;
 import org.system.livraison.entities.Reservation;
 import org.system.livraison.entities.Vehicule;
 
-public interface ILivraisinMetier {
+public interface ILivraisonMetier {
 	public Compte addCompte(Compte cpte, long refCli,long refGest);
 	public Client addClient(Client cli );
 	public Gestionnaire addGestionnaire(Gestionnaire gest);

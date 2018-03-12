@@ -1,7 +1,8 @@
-package org.system.livraison.dao;
+package org.system.livraison.metier;
 
 import java.util.List;
 
+import org.system.livraison.dao.ILivraisonDAO;
 import org.system.livraison.entities.Adresse;
 import org.system.livraison.entities.Client;
 import org.system.livraison.entities.Commande;
@@ -15,7 +16,7 @@ import org.system.livraison.entities.Objet;
 import org.system.livraison.entities.Reservation;
 import org.system.livraison.entities.Vehicule;
 
-public class LivraisonMetierImpl  implements ILivraisonDAO {
+public class LivraisonMetierImpl  implements ILivraisonMetier {
 //couplage faible avec la couche DAO
 //cette couche Metier va faire appel à la couche DAO
 
