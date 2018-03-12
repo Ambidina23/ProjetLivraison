@@ -1,32 +1,37 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Mission")
-public class Mission {
+public class Mission implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long refMiss;
 	private String typeMiss;
 	private String descriptMiss;
 	@ManyToMany
-	@JoinTable(name="Miss_Grp")
+	@JoinTable(name="Miss_Equi",
+	joinColumns=@JoinColumn(name="refMiss"),
+	inverseJoinColumns=@JoinColumn(name="refEqui"))
 	private Collection<Equipe>equipes; 
 	@ManyToMany
-	@JoinTable(name="Miss_Veh")
+	@JoinTable(name="Miss_Veh",
+	joinColumns=@JoinColumn(name="refMiss"),
+	inverseJoinColumns=@JoinColumn(name="refVeh"))
 	private Collection<Vehicule> vehicules;
-	@ManyToMany
-	@JoinTable(name="Miss_Cmd")
+	@ManyToMany(mappedBy="missions")
 	private Collection<Commande> commandes;
-	
 	
 	public Mission() {
 		super();

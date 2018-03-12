@@ -1,22 +1,30 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
-@Table
-public class Gestionnaire {
+@Table(name="Genstionnaire")
+public class Gestionnaire implements Serializable {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long refGest;
 	private String nomGest;
 	private String prenomGest;
 	private Double telephoneGest;
 	private String mailGest;
 	
 	@OneToOne
-	@JoinColumn(name="idCpte")
+	@JoinColumn(name="refCpte")
 	private String Compte;
 	@OneToMany(mappedBy="Gestionaire")
 	private Collection<Client> clients;
@@ -102,6 +110,14 @@ public class Gestionnaire {
 
 	public void setReservations(Collection<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+
+	public long getRefGest() {
+		return refGest;
+	}
+
+	public void setRefGest(long refGest) {
+		this.refGest = refGest;
 	}
 	
 	

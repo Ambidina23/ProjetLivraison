@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,14 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Commande")
 public class Commande implements Serializable{
 	
-	private static final long serialVersionUID = 4747619227099820040L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private double numCmd;
+	private long refCmd;
 	private Date dateCreationCmd;
 	private Date dateExpeditionCmd;
 	private Date dateLivraisonCmd;
@@ -39,20 +38,26 @@ public class Commande implements Serializable{
 	@JoinColumn(name="refFact")
 	private String Facture;
 	@ManyToMany
-	@JoinTable(name="Cmd_Miss")
+	@JoinTable(name="Cmd_Miss",
+	joinColumns=@JoinColumn(name="refEmp"),
+	inverseJoinColumns=@JoinColumn(name="refMiss"))
 	private Collection <Mission> missions;
 	@ManyToMany
-	@JoinTable(name="Cmd_Adr")
+	@JoinTable(name="Cmd_Adr",
+	joinColumns=@JoinColumn(name="refCmd"),
+	inverseJoinColumns=@JoinColumn(name="refAdr"))
 	private Collection <Adresse> adresses;
 	@OneToMany(mappedBy="Commande")
 	private Collection<Objet> objets;
 	@ManyToMany
-	@JoinTable(name="Cmd_Veh")
+	@JoinTable(name="Cmd_Veh",
+	joinColumns=@JoinColumn(name="refCmd"),
+	inverseJoinColumns=@JoinColumn(name="refVeh"))
 	private Collection<Vehicule> vehicules;
-	public Commande(double numCommande, Date dateCreationCmd, Date dateExpeditionCmd, Date dateLivraisonCmd,
+	public Commande(long refCmd, Date dateCreationCmd, Date dateExpeditionCmd, Date dateLivraisonCmd,
 			boolean etatValidationCmd, boolean etatPaiementCmd) {
 		super();
-		this.numCmd = numCommande;
+		this.refCmd = refCmd;
 		this.dateCreationCmd = dateCreationCmd;
 		this.dateExpeditionCmd = dateExpeditionCmd;
 		this.dateLivraisonCmd = dateLivraisonCmd;
@@ -64,10 +69,10 @@ public class Commande implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public double getNumCommande() {
-		return numCmd;
+		return refCmd;
 	}
-	public void setNumCommande(double numCommande) {
-		this.numCmd = numCommande;
+	public void setNumCommande(long refCmd) {
+		this.refCmd = refCmd;
 	}
 	public Date getDateCreationCmd() {
 		return dateCreationCmd;

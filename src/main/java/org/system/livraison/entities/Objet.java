@@ -1,13 +1,22 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Objet")
-public class Objet {
+public class Objet implements Serializable {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long refObj;
 	private String nomObjet;
 	private double poidsObjet;
 	private String fragilite;
@@ -15,10 +24,10 @@ public class Objet {
 	private double valeur;
 	private String photo;
 	@ManyToOne
-	@JoinColumn(name="idObjet")
+	@JoinColumn(name="refObjet")
 	private String Commande;
 	@ManyToOne
-	@JoinColumn(name="idObjet")
+	@JoinColumn(name="refObjet")
 	private String Vehicule;
 	
 	public String getNomObjet() {
@@ -83,6 +92,12 @@ public class Objet {
 	}
 	public void setVehicule(String vehicule) {
 		Vehicule = vehicule;
+	}
+	public long getRefObj() {
+		return refObj;
+	}
+	public void setRefObj(long refObj) {
+		this.refObj = refObj;
 	}
 
 }

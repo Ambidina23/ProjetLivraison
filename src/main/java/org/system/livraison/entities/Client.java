@@ -1,7 +1,6 @@
 package org.system.livraison.entities;
 
 import java.io.Serializable;
-
 import java.util.Collection;
 
 import javax.persistence.DiscriminatorColumn;
@@ -14,34 +13,48 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 //Gestion des persistances
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Client")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="typeClient",
 discriminatorType=DiscriminatorType.STRING, length=3)
-public abstract class Client implements Serializable {
+public  class Client implements Serializable {
 //annotations JPA(@OneToOne, @ManyToOne, @OneToMany, @ManyToMany)
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long codeClient;
+	private long refCli;
+	public String getCompte() {
+		return Compte;
+	}
+	public void setCompte(String compte) {
+		Compte = compte;
+	}
+	public long getRefCli() {
+		return refCli;
+	}
+	public void setRefCli(long refCli) {
+		this.refCli = refCli;
+	}
+	private String nomRespons;
 	private String nomClient;
+	private String penonomClient;
 	private double telephoneClient;
 	private String mailClient;
 	private String typeClient;
-	@OneToOne
-	@JoinColumn(name="idAdresse")
+	
+	@ManyToOne
+	@JoinColumn(name="refAdr")
 	private String Adresse;
 	@ManyToOne
 	@JoinColumn(name="refGest")
 	private String Gestionnaire;
 	@OneToOne
-	@JoinColumn(name="idCompte")
 	private String Compte;
 	@OneToMany(mappedBy="Client", fetch=FetchType.LAZY)
 	private Collection <Commande> commandes;
@@ -61,10 +74,10 @@ public abstract class Client implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	public long getIdClient() {
-		return codeClient;
+		return refCli;
 	}
-	public void setIdClient(long idClient) {
-		this.codeClient = idClient;
+	public void setIdClient(long refCli) {
+		this.refCli = refCli;
 	}
 	public String getNomClient() {
 		return nomClient;
@@ -115,6 +128,18 @@ public abstract class Client implements Serializable {
 	}
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
+	}
+	public String getNomRespons() {
+		return nomRespons;
+	}
+	public void setNomRespons(String nomRespons) {
+		this.nomRespons = nomRespons;
+	}
+	public String getPenonomClient() {
+		return penonomClient;
+	}
+	public void setPenonomClient(String penonomClient) {
+		this.penonomClient = penonomClient;
 	}
 	
 

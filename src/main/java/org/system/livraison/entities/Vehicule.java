@@ -1,6 +1,8 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Vehicule")
-public class Vehicule {
+public class Vehicule implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int refVeh;
@@ -23,11 +26,12 @@ public class Vehicule {
 	private String typeVeh;
 	@OneToMany(mappedBy="Objet")
 	private Collection<Objet> objets;
-	@ManyToMany
-	@JoinTable(name="Veh_Miss")
+	@ManyToMany(mappedBy="vehicules")
 	private Collection<Mission> missions;
 	@ManyToMany
-	@JoinTable(name="Veh_Res")
+	@JoinTable(name="Veh_Res",
+	joinColumns=@JoinColumn(name="refVeh"),
+	inverseJoinColumns=@JoinColumn(name="refRes"))
 	private Collection<Reservation> reservations;
 	
 	public Vehicule() {

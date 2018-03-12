@@ -10,27 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
-@Table(name="Comtpte")
+@Table(name="Compte")
 public class Compte implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1731378640766807291L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idCmpte;
+	private long refCpte;
 	private String login;
 	private String mdp;
 	private Date dateCreationCpte;
 	private String  typeCpte;
 	private String mail;
-	@OneToOne
-	@JoinColumn(name="refClient")
-	private String Client;
+	@OneToOne(mappedBy="Compte")
+	private Client cli;
 	@OneToOne
 	@JoinColumn(name="refGest")
-	private String Gestionnaire;
+	private Gestionnaire gest;
+	
+
+	
 	public Compte(String login, String mdp, Date dateCreationCpte, int userPrivilage, String mail) {
 		super();
 		this.login = login;
@@ -74,24 +74,37 @@ public class Compte implements Serializable{
 	public void setTypeCpte(String typeCpte) {
 		this.typeCpte = typeCpte;
 	}
-	public int getIdCmpte() {
-		return idCmpte;
+	
+	public long getRefCpte() {
+		return refCpte;
 	}
-	public void setIdCmpte(int idCmpte) {
-		this.idCmpte = idCmpte;
+	public void setRefCpte(long refCpte) {
+		this.refCpte = refCpte;
 	}
-	public String getClient() {
-		return Client;
+	
+	public Date getDateCreationCpte() {
+		return dateCreationCpte;
 	}
-	public void setClient(String client) {
-		Client = client;
+	public void setDateCreationCpte(Date dateCreationCpte) {
+		this.dateCreationCpte = dateCreationCpte;
 	}
-	public String getGestionnaire() {
-		return Gestionnaire;
+	
+	public Client getClient() {
+		return cli;
 	}
-	public void setGestionnaire(String gestionnaire) {
-		Gestionnaire = gestionnaire;
+	public void setClient(Client cli) {
+		this.cli = cli;
 	}
+	
+	public Gestionnaire getGestionnaire() {
+		return gest;
+	}
+	public void setGestionnaire(Gestionnaire gest) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	
 	
 	

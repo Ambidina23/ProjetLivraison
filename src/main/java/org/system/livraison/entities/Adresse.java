@@ -1,34 +1,40 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Adresse")
-public class Adresse {
+public class Adresse implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idAdresse;
+	private long refAdr;
 	private int numRue;
 	private String nomRue;
 	private int codeVille;
 	private String nomVille;
 	private String nomPays;
-	@ManyToOne
-	@JoinColumn(name="codeClient")
+	@OneToMany(mappedBy="Adresse")
 	private String Client;
-	@ManyToOne
-	@JoinColumn(name="codeCmd")
-	private String Commande;
 	@OneToMany(mappedBy="Adresse")
 	private String Employe;
+
+	@ManyToMany(mappedBy="adresses")
+	private Collection<Commande> commandes;
 	
+	public Adresse() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Adresse(int numRue, String nomRue, int codeVille, String nomVille, String nomPays) {
 		super();
 		this.numRue = numRue;
@@ -37,10 +43,14 @@ public class Adresse {
 		this.nomVille = nomVille;
 		this.nomPays = nomPays;
 	}
-	public Adresse() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	public Collection<Commande> getCommandes() {
+		return commandes;
 	}
+	public void setCommandes(Collection<Commande> commandes) {
+		this.commandes = commandes;
+	}
+	
 	public int getNumRue() {
 		return numRue;
 	}
@@ -71,11 +81,11 @@ public class Adresse {
 	public void setNomPays(String nomPays) {
 		this.nomPays = nomPays;
 	}
-	public long getIdAdresse() {
-		return idAdresse;
+	public long getRefAdresse() {
+		return refAdr;
 	}
 	public void setIdAdresse(long idAdresse) {
-		this.idAdresse = idAdresse;
+		this.refAdr = idAdresse;
 	}
 	public String getClient() {
 		return Client;
@@ -89,11 +99,10 @@ public class Adresse {
 	public void setEmploye(String employe) {
 		Employe = employe;
 	}
-	public String getCommande() {
-		return Commande;
-	}
-	public void setCommande(String commande) {
-		Commande = commande;
+	
+	public void setEmploye(Gestionnaire gest) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

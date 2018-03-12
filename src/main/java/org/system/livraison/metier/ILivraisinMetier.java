@@ -1,4 +1,4 @@
-package org.system.livraison.dao;
+package org.system.livraison.metier;
 
 import java.util.List;
 
@@ -14,11 +14,8 @@ import org.system.livraison.entities.Mission;
 import org.system.livraison.entities.Objet;
 import org.system.livraison.entities.Reservation;
 import org.system.livraison.entities.Vehicule;
-// interface DAO
-public interface ILivraisonDAO {
-	//Création de toutes les Methodes qui seront redefinies dans l'implementation 
-	//de la Classe DAOImpl
-	
+
+public interface ILivraisinMetier {
 	public Compte addCompte(Compte cpte, long refCli,long refGest);
 	public Client addClient(Client cli );
 	public Gestionnaire addGestionnaire(Gestionnaire gest);
@@ -58,10 +55,4 @@ public interface ILivraisonDAO {
 	public List<Compte> getCompteByGestionnaire(long refEmp);
 	public List<Employe> getEmployeByEquipe(long refEqui);
 
-	
-	
-	
-	
-	
-	 
 }

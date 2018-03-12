@@ -1,5 +1,7 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
+
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -9,23 +11,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Employe")
-public class Employe {
+public class Employe implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int refEmploye;
+	private int refEmp;
 	private String nomEmploye;
 	private String prenomEmploye;
 	@ManyToMany
-	@JoinTable(name="Emp_Equi")
+	@JoinTable(name="Emp_Equi",
+	joinColumns=@JoinColumn(name="refEmp"),
+	inverseJoinColumns=@JoinColumn(name="refEqui"))
 	private Collection <Equipe> equipes;
-	@OneToOne
-	@JoinColumn(name="idAdresse")
+	@ManyToOne
+	@JoinColumn(name="refAdr")
 	private String Adresse;
+	
 	public Employe(String nomEmploye, String prenomEmploye) {
 		super();
 		this.setNomEmploye(nomEmploye);
@@ -38,6 +44,12 @@ public class Employe {
 	}
 	public String getNomEmploye() {
 		return nomEmploye;
+	}
+	public int getRefEmp() {
+		return refEmp;
+	}
+	public void setRefEmp(int refEmp) {
+		this.refEmp = refEmp;
 	}
 	public void setNomEmploye(String nomEmploye) {
 		this.nomEmploye = nomEmploye;

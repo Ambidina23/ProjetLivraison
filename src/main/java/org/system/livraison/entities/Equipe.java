@@ -1,28 +1,35 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
+
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Equipe")
-public class Equipe {
+public class Equipe implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String refEqui;
-	private String descritpEqui;
-	@JoinTable(name="Emp_Equi")
+	private String descritpEquipe;
+	@ManyToMany(mappedBy="equipes")
 	private Collection<Employe> employes;
-	@ManyToMany
-	@JoinTable(name="Equ_Miss")
+	@ManyToMany(mappedBy="equipes")
 	private Collection<Mission> missions;
+	
+	
+	public Collection<Mission> getMissions() {
+		return missions;
+	}
+	public void setMissions(Collection<Mission> missions) {
+		this.missions = missions;
+	}
 	public Equipe() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -38,10 +45,10 @@ public class Equipe {
 		this.refEqui = refEquipe;
 	}
 	public String getDescritpEquipe() {
-		return descritpEqui;
+		return descritpEquipe;
 	}
 	public void setDescritpEquipe(String descritpEquipe) {
-		this.descritpEqui = descritpEquipe;
+		this.descritpEquipe = descritpEquipe;
 	}
 	public Collection<Employe> getEmployes() {
 		return employes;
@@ -49,5 +56,6 @@ public class Equipe {
 	public void setEmployes(Collection<Employe> employes) {
 		this.employes = employes;
 	}
+	
 
 }

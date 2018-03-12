@@ -1,5 +1,7 @@
 package org.system.livraison.entities;
 
+import java.io.Serializable;
+
 import java.util.Collection;
 
 import java.util.Date;
@@ -9,13 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+@SuppressWarnings("serial")
 @Entity
 @Table(name="Reservation")
-public class Reservation {
+public class Reservation implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private double refRes;
@@ -25,8 +28,7 @@ public class Reservation {
 	@OneToOne
 	@JoinColumn(name="refGest")
 	private String Gestionnaire;
-	@ManyToMany
-	@JoinTable(name="Res_Veh")
+	@ManyToMany(mappedBy="reservations")
 	private Collection<Vehicule> vehicules;
 	
 	
